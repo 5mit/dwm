@@ -28,12 +28,16 @@ static const char col_cyan[]        = "#00ffff";
 static const char col_blue[]        = "#0000ff";
 static const char col_orange[]      = "#f59542";
 static const char col_purple[]      = "#6a0dad";
+//static const char col_teal[]        = "#00c79a";
+//static const char col_teal[]        = "#00a272";
+static const char col_teal[]        = "#006c4c";
+
 
 //set colors:
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_purple,  col_purple },
+	[SchemeSel]  = { col_gray4, col_teal,  col_teal },
 };
 
 /* tagging */
@@ -75,11 +79,13 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_purple, "-sf", col_gray4, NULL };
-/* Network Manager dmenu */
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_teal, "-sf", col_gray4, NULL };
+//network manager dmenu
 static const char *nmdmenu[] = {"networkmanager_dmenu", NULL};
-// File Manager
+//file manager
 static const char *filemanager[] = {"pcmanfm", NULL};
+//web browser
+static const char *webbrowser[] = {"firefox", NULL};
 //launches htop
 static const char *monitor[] = { "/usr/bin/htop", NULL };
 //sets st as the default terminal
@@ -98,7 +104,7 @@ static const char *declight[] = { "xbacklight", "-dec", "5", NULL };
 
 
 //screenshot (scrot - rectangular area select)
-static const char *screenshot[] = {"/bin/sh", "-c", "scrot --select $SCREENSHOT_DIR/b", NULL };
+static const char *screenshot[] = {"/bin/sh", "-c", "scrot --select $SCREENSHOT_DIR/%y-%m-%d@%H:%M:%S", NULL };
 
 #include "shiftview.c"
 static char *endx[] = { "/bin/sh", "-c", "endx", "externalpipe", NULL };
@@ -151,6 +157,7 @@ static Key keys[] = {
 	{ MODKEY,		XK_F7, 		spawn, 		{.v = declight } },
 	{ MODKEY,		XK_F9,		spawn, 		{.v = nmdmenu } },
 	{ MODKEY,		XK_e,		spawn,		{.v = filemanager } },
+    { MODKEY,       XK_w,       spawn,      {.v = webbrowser } },
 	{ MODKEY,		XK_F11,		spawn,		{.v = screenshot }}
 };
 
